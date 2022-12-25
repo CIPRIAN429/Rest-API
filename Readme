@@ -1,0 +1,40 @@
+Pasare Catalin-Ciprian - 324CB
+
+                                                    Tema 3 Pcom
+
+    Am folosit biblioteca parson deoarece era recomandata in cerinta temei si parea dificil sa fac parsare de mana.
+    
+    Voi explica fiecare comanda in parte:
+
+    1. register - Folosesc structura User pentru a citi in campurile acesteia user-ul si parola. Dupa
+                  citire creez obiectul json si il trimit intr-o cerere de tip post cu restul elementelor catre
+                  server. Dupa ce primesc raspunsul de la server, verific statusul primit (daca acesta incepe
+                  cu 2, inseamna ca totul a decurs ok) si afisez un mesaj corespunzator.
+
+    2. login - Aceasta comanda este asemanatoare. Diferenta e ca verific daca raspunsul serverului contine
+               un cookie. Daca da, il salvez si afisez un mesaj pozitiv (clientul s-a logat), altfel inseamna
+               ca nu este inregistrat.
+
+    3. enter_library - Initial testez daca utilizatorul este logat. Dupa aceea trimit o cerere de tip get 
+                       care sa contina si cookie-ul clientului, apoi incerc sa extrag token-ul jwt din raspunsul
+                       serverului (doar daca raspunsul este pozitiv).
+
+    4. get_books - Utilizatorul trebuie sa fie logat si sa aiba acces la biblioteca. Trimit o cerere de tip get
+                   catre server si extrag din raspuns lista de carti de tip json.
+
+    5. get_book - Citesc id-ul de la tastatura, testez daca acesta este un numar, iar apoi trimit o cerere de tip
+                  get catre server. Din raspuns extrag cartea si o modelez ca un obiect json.
+
+    6. add_book - Folosesc structura Book pentru a citi in campurile acesteia informatiile despre carte. Dupa citire,
+                  compun mesajul ce trebuie trimis catre server printr-o cerere de tip post cu ajutorul bibliotecii
+                  parson si la final verific daca s-a efectuat cu succes adaugarea cartii.
+
+    7. delete_book - Citesc id-ul carti ce se vrea eliminata si verific ca formatul acestuia sa fie bun. Trimit o
+                     cerere de tip delete catre server. Verific daca id-ul acestei carti exista (raspuns pozitiv
+                     de la server) si afisez un mesaj corespunzator.
+
+    8. logout - Clientul trebuie sa fie logat pentru a se putea deloga (evident). Trimit o cerere de tip get catre
+                server si verific sa am raspunsul ok inapoi. Pentru delogare reusita, elimin accesul utilizatorului
+                la biblioteca .
+
+    9. exit - Se inchide serverul.
